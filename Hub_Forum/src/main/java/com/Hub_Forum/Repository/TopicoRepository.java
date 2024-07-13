@@ -1,0 +1,18 @@
+package com.Hub_Forum.Repository;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.Hub_Forum.Model.Topico.Topico;
+
+public interface TopicoRepository extends JpaRepository<Topico, Long> {
+
+    @Query("SELECT t FROM Topico t WHERE t.ativo = true")
+    Page<Topico> findAllByAtivo(Pageable paginacao);
+
+    @Query("SELECT t FROM Topico t WHERE t.ativo = false")
+    Page<Topico> findAllByDesativado(Pageable paginacao);
+    
+}
